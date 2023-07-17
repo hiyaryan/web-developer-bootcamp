@@ -1,0 +1,21 @@
+body {
+    color: purple;
+}
+
+h1 {
+    color: blue;
+}
+
+section {
+    color: aqua;
+}
+
+form {
+    color: greenyellow;
+}
+
+/* Inherits color from `form` */
+button,
+input {
+    color: inherit;
+}

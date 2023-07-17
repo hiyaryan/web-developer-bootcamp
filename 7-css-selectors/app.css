@@ -1,0 +1,150 @@
+/* ex. universal selector */
+/* * {
+    color: pink;
+    background-color: cyan;
+} */
+
+body {
+    background-color: #cdb4db;
+}
+
+/* ex. element selector */
+button {
+    font-size: 30px;
+    background-color: #bde0fe;
+}
+
+/* ID selector */
+#signup {
+    background-color: #a2d2ff;
+    color: #ffafcc;
+}
+
+h1,
+h2 {
+    color: #ffc8dd;
+}
+
+span {
+    color: #a2d2ff;
+}
+
+/* Class selector */
+/* See line 67 for alternative selection. */
+.tag {
+    background-color: #ffafcc;
+    color: #ffc8dd;
+    font-size: 16px;
+}
+
+/* Descendent selector */
+.post a {
+    color: #a2d2ff;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+footer a {
+    color: #ffafcc;
+}
+
+/* Adjacent combinator */
+input+button {
+    background-color: pink;
+}
+
+h2+button {
+    font-size: 20px;
+}
+
+/* Direct child */
+footer>a {
+    color: #bde0fe;
+}
+
+/* Attribute selector */
+input[type="password"] {
+    color: red;
+}
+
+section[class="post"] {
+    background-color: purple;
+}
+
+/* This is equivalent to above. */
+/* section.post {
+    background-color: purple;
+} */
+
+/* href containing "google" */
+a[href*="google"] {
+    color: mediumspringgreen;
+}
+
+/* href ending in ".com" */
+a[href$=".com"] {
+    font-size: x-large;
+}
+
+/* Pseudo Classes */
+/* :hover */
+button:hover {
+    background-color: #cdb4db;
+    color: #f1faee
+}
+
+/* Select all post class buttons on hover. */
+.post button:hover {
+    background-color: aqua;
+    color: #cdb4db;
+}
+
+.post a:hover {
+    text-decoration: underline;
+}
+
+/* :active */
+.post button:active {
+    background-color: black;
+}
+
+/* :nth-of-type() */
+.post:nth-of-type(2n) {
+    background-color: lemonchiffon;
+}
+
+/* Pseudo Elements */
+/* Select first-letter of every <h2> */
+h2::first-letter {
+    font-size: 50px;
+}
+
+/* Select first-line of every <p> */
+p::first-line {
+    color: purple;
+}
+
+/* Select the selection of every <p> */
+p::selection {
+    background-color: coral;
+}
+
+/* Cascade */
+/* h1,h2 defined above but these styles will be applied (cascade). */
+h1,
+h2 {
+    color: yellow;
+}
+
+/* Specificity */
+/* This style is conflicting with more specific styles applied above. */
+button:hover {
+    background-color: olive;
+    font-size: 10px;
+}
+
+/* !important */
+/* Overrides specificity */
+button {
+    background-color: magenta !important;
+}

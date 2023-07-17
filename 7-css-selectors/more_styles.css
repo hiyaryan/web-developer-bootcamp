@@ -1,0 +1,5 @@
+/* h1,h2 defined in app.css but these styles will be applied (cascade). */
+h1,
+h2 {
+    color: olivedrab;
+}
