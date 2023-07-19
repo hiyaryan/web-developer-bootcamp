@@ -1,0 +1,69 @@
+body {
+    /* body has margin by default */
+    margin: 0;
+}
+
+h1 {
+    width: 200px;
+    background-color: #ffb703;
+    padding-left: 100px;
+    padding-top: 50px;
+    /* h1 have margin by default */
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+/* span is an element in the h1 */
+span {
+    /* adds margin to the left */
+    margin-left: 30px;
+    /* does nothing */
+    margin-top: 30px;
+}
+
+div {
+    width: 200px;
+    height: 200px;
+}
+
+#one {
+    background-color: #8ecae6;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black;
+    /* box-sizing: border-box; */
+    margin-left: 50px;
+    margin-bottom: 100px;
+}
+
+#two {
+    background-color: #219ebc;
+    border-width: 3px;
+    border-style: dashed;
+    border-color: #ffb703;
+    border-left-width: 7px;
+    padding-right: 50px;
+    margin: 200px;
+}
+
+#three {
+    background-color: #023047;
+    /* width style color */
+    border: 5px solid #219ebc;
+    border-left-style: dotted;
+    border-radius: 50%;
+}
+
+button {
+    /* Apply to all four sides */
+    /* padding: 20px; */
+
+    /* top and bottom | left and right */
+    /* padding: 0px 20px; */
+
+    /* top | left and right | bottom */
+    /* padding: 10px 25px 5px; */
+
+    /* top | right | bottom | left */
+    padding: 10px 20px 30px 40px;
+}

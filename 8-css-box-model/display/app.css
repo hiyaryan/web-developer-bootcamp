@@ -1,0 +1,53 @@
+/* h1 are block elements by default */
+.inline-h1 {
+    background-color: palegoldenrod;
+    border: 1px solid black;
+    /* change to inline element */
+    display: inline;
+}
+
+/* div wrapping the h1 elements above */
+.hide-me {
+    display: none;
+}
+
+.block-h1 {
+    background-color: paleturquoise;
+    border: 1px solid black;
+    /* width and height are respected for block elements */
+    width: 300px;
+    height: 200px;
+    /* padding and margin are respected for block elements */
+    padding: 50px;
+    margin: 100px;
+}
+
+/* span are inline elements by default */
+.block-span {
+    background-color: paleturquoise;
+    border: 1px solid black;
+    /* change to block element */
+    display: block;
+}
+
+.inline-span {
+    background-color: palevioletred;
+    border: 1px solid black;
+    /* width and height do not affect inline elements */
+    width: 500px;
+    height: 500px;
+    /* padding and margin do have affect on inline elements but only horizontally */
+    padding: 50px;
+    margin: 50px;
+}
+
+/* div are block elements by default */
+div {
+    height: 200px;
+    width: 200px;
+    background-color: olivedrab;
+    border: 5px solid black;
+    /* if set to inline, divs are stacked, inline-block respects width and height */
+    display: inline-block;
+    margin: 50px;
+}

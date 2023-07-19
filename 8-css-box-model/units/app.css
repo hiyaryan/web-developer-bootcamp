@@ -1,0 +1,89 @@
+/* the root element */
+html {
+    font-size: 30px;
+}
+
+section {
+    background-color: #6a4c93;
+    width: 400px;
+    height: 800px;
+}
+
+/* child of section above */
+div {
+    background-color: #1982c4;
+    /* takes 70% of the section width and 20% of the section height */
+    width: 70%;
+    height: 20%;
+}
+
+h1 {
+    font-size: 40px;
+    border: 1px solid black;
+    /* 200% if the font-size, or 80px */
+    line-height: 200%;
+}
+
+/* original article */
+/* parent of children below dictating size of font (in `em`) */
+#ems {
+    font-size: 15px;
+}
+
+/* child of article above */
+#ems h2 {
+    /* twice the font-size of the article */
+    font-size: 5em;
+    /* `em` refers to the font-size of this h2 element */
+    margin-left: 1em;
+}
+
+/* child of article above */
+#ems h3 {
+    font-size: 1.5em
+}
+
+/* child of article above */
+#ems p {
+    font-size: 0.8em;
+}
+
+button {
+    font-size: 1em;
+    padding: 0 1em;
+    border-radius: 0.5em;
+    background-color: #8ac926;
+    color: white;
+}
+
+/* nested uls */
+#ems ul {
+    /* ems grow and shrink very quickly */
+    /* this ul will appear too large */
+    /* font-size: 1.5em;     */
+    /* this ul will appear too small */
+    font-size: 0.7em;
+}
+
+/* rems id is for the copied article */
+#rems h2 {
+    /* rem refers to the root element font-size */
+    font-size: 3rem;
+}
+
+#rems h3 {
+    /* rem refers to the root element font-size */
+    font-size: 2rem;
+}
+
+#rems ul {
+    /* rem allows all nested ul elements to scale off the root element */
+    /* em scales of the parent making each nested ul a different size */
+    font-size: 1.5rem;
+}
+
+/* note that for button font-size, rems are a good choice */
+/* but for other properties like padding or border-radius use ems */
+#rems button {
+    font-size: 1.5rem;
+}
