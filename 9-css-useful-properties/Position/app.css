@@ -1,0 +1,44 @@
+div {
+    width: 100px;
+    height: 100px;
+    background-color: #3d405b;
+    border: 2px solid black;
+    margin: 10px;
+    display: inline-block;
+}
+
+#middle {
+    background-color: #81b29a;
+}
+
+#static #middle {
+    position: static;
+    /* has no effect since position is static */
+    top: 100px;
+}
+
+#relative #middle {
+    position: relative;
+    /* has an effect since position is relative  */
+    top: 50px;
+    left: 50px;
+}
+
+/* positioned element that its descendent #middle holds an absolute position to */
+#absolute {
+    position: relative;
+}
+
+#absolute #middle {
+    /* has an effect relative to the positioned #absolute section above */
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+#fixed #middle {
+    /* has an effect relative to the positioned #body block  */
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}

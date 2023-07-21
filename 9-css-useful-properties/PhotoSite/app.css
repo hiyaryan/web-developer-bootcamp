@@ -1,0 +1,16 @@
+img {
+    /* 3 inline images, 90% total, 30% per element */
+    width: 30%;
+    /* 10% margin remaining to distribute over 6 sides of each element */
+    margin: calc(10%/6);
+}
+
+nav {
+    text-transform: uppercase;
+    border-bottom: 2px solid #f1f1f1;
+    width: 30%;
+    margin-left: calc(10%/6);
+    padding: 0.7em 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.5em;
+}

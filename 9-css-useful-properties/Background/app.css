@@ -1,0 +1,21 @@
+section {
+    width: 80%;
+    height: 800px;
+    /* background-image: url(https://images.unsplash.com/photo-1688872147892-ea438b07e237?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1631&q=80); */
+    /* contains the whole image but repeats if necessary */
+    /* background-size: contain; */
+    /* contains only part of the image that fits in the container */
+    /* background-size: cover; */
+    /* bottom of image is positioned in view */
+    /* background-position: bottom; */
+    /* this is the same as setting each component separately above */
+    /* background: center/40% no-repeat url(https://images.unsplash.com/photo-1688872147892-ea438b07e237?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1631&q=80), blueviolet; */
+    /* can also include multiple backgrounds (blueviolet colored background) */
+    background: center/40% no-repeat url(https://images.unsplash.com/photo-1688872147892-ea438b07e237?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1631&q=80), blueviolet;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 100px;
+    color: white;
+}
