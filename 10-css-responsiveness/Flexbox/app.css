@@ -1,0 +1,118 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+#container {
+    background-color: #003049;
+    width: 90%;
+    /* height: 500px; */
+    margin: 0 auto;
+    border: 5px solid #003049;
+    display: flex;
+
+    /* default: cross axis up-down, main axis lef-right */
+    flex-direction: row;
+    /* flex-direction: row-reverse; */
+    /* swaps the cross axis and main axis */
+    /* flex-direction: column; */
+    /* flex-direction: column-reverse; */
+
+
+    /* `justify-content`: aligns items along the main axis */
+    /* default */
+    /* justify-content: flex-start; */
+    /* justify-content: flex-end; */
+    justify-content: center;
+    /* justify-content: space-between; */
+    /* justify-content: space-around; */
+    /* justify-content: space-evenly; */
+    /* justify-content: flex-end; */
+
+    /* default */
+    /* flex-wrap: nowrap; */
+    /* flex-wrap: wrap; */
+    /* flex-wrap: wrap-reverse; */
+
+    /* `align-items`: aligns items along the cross axis */
+    /* default */
+    align-items: flex-start;
+    /* align-items: flex-end; */
+    /* align-items: center; */
+    /* baseline */
+    /* align-items: baseline; */
+
+    /* `align-content`: controls space along the cross-axis */
+    /* default */
+    /* align-content: normal; */
+    /* align-content: center; */
+    /* align-content: flex-start; */
+    /* align-content: space-between; */
+}
+
+#container div {
+    /* ignored if `flex-basis` is used */
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    /* font-size: 4em; */
+    /* width used in a row along main axis */
+    flex-basis: 300px;
+    /* distributes all remaining space to all elements in container equally */
+    /* flex-grow: 1; */
+    /* the maximum width an element can grow to */
+    /* max-width: 300px; */
+}
+
+div:nth-of-type(1) {
+    /* gives remaining space in container to element */
+    flex-grow: 1;
+}
+
+div:nth-of-type(3) {
+    /* `align-self`: similar to `align-items` but to individual elements in the container */
+    /* align-self: center; */
+    /* align-self: flex-end; */
+    /* element to shrink by a factor of 3 if elements in container are larger than the container */
+    flex-shrink: 3;
+}
+
+div:nth-of-type(5) {
+    /* `align-self`: similar to `align-items` but to individual elements in the container */
+    /* align-self: center; */
+    /* align-self: flex-end; */
+    /* align-self: flex-start; */
+    /* give twice as much space to this element in the container */
+    flex-grow: 2;
+    /* `flex-shrink` value of 0 prevents element from shrinking at all */
+    flex-shrink: 0;
+}
+
+/* example using flex shorthand */
+main {
+    width: 80%;
+    margin: 0 auto;
+    border: 5px solid black;
+    height: 500px;
+    display: flex;
+}
+
+main .sidebar {
+    background-color: #6930c3;
+    /* border: 2px solid white; */
+    /* Three values: flex-grow | flex-shrink | flex-basis */
+    flex: 1 2 300px;
+}
+
+main .maincontent {
+    background-color: #80ffdb;
+    /* Three values: flex-grow | flex-shrink | flex-basis */
+    flex: 2 1 800px;
+}
