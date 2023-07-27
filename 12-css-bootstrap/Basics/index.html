@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Basics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="display-1 text-center text-primary">Bootstrap Playground</h1>
+        <h2 class="display-4">Buttons <span class="badge bg-success rounded-pill">New</span></h2>
+        <button type="button" class="btn btn-primary">Primary</button>
+        <button type="button" class="btn btn-success">Success</button>
+        <button type="button" class="btn btn-success" disabled>Success Disabled</button>
+
+        <button type="button" class="btn btn-outline-warning">Warning</button>
+        <button type="button" class="btn btn-outline-danger">Danger</button>
+
+        <button type="button" class="btn btn-outline-info btn-lg">Large Info</button>
+        <button type="button" class="btn btn-secondary btn-sm">Small Secondary</button>
+
+        <button>Default Button</button>
+
+        <button class="btn btn-primary">Updates <span class="badge text-bg-light">9</span></button>
+
+        <h3>Button Group</h3>
+        <div class="btn-group" role="group">
+            <button class="btn btn-warning">One</button>
+            <button class="btn btn-danger">Two</button>
+            <button class="btn btn-warning">Three</button>
+        </div>
+
+        <h3>Alerts</h3>
+        <!-- role="alert" for accessibility -->
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading">Oh no!</h4>
+            Danger! You are about to end the world as we know it!
+            <!-- multiplication symbol "times" entity code commonly used to indicate closing something -->
+            <!-- aria-label="Close" for accessibility -->
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <h2 class="display-4">Typography</h2>
+        <p class="lead">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut ipsum minus ullam, atque excepturi
+            placeat neque
+            odit facilis voluptatibus accusamus numquam cupiditate id reiciendis nesciunt et tenetur vel dolorem rerum.
+        </p>
+
+        <blockquote class="blockquote text-end bg-light">
+            <p class="mb-3">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias perspiciatis rem vero
+                dolor, molestias
+                voluptatem porro expedita facilis architecto hic ab repellat deleniti! Iste voluptatem quidem odio
+                minus? Aut, veniam?</p>
+            <footer class="blockquote-footer">
+                Mr. Lorem Ipsum
+            </footer>
+        </blockquote>
+    </div>
+
+    <!-- JavaScript used for animations such as closing alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
