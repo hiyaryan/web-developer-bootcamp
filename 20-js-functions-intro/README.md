@@ -85,7 +85,7 @@ findLargest(-2, 77); // "77 is larger!"
 findLargest(33, 33); // "33 and 33 are equal"
 ```
 
-## `return` Keyword
+## [`return`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/return) Keyword
 Built-in methods return values when called which can be stored in a variable.
 
 ```
