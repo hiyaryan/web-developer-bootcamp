@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random</title>
+</head>
+
+<body>
+    <h1>Your random number is:
+        <!-- <%= Math.floor(Math.random() * 10) + 1 %> -->
+        <%= num %>
+    </h1>
+    <!-- using scriplets -->
+    <% if (num % 2===0) { %>
+        <h2>That is an even number!</h2>
+        <% } else { %>
+            <h2>That is an odd number!</h2>
+            <% } %>
+                <!-- using tertiary operator -->
+                <h3>
+                    <%= num%2===0 ? "EVEN" : "ODD" %>
+                </h3>
+</body>
+
+</html>
