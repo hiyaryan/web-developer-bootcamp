@@ -7,6 +7,8 @@ While other sections pushed to GitHub take a more Gist approach for academic pur
 
 **Table of Contents**
 - [Section 39: Campgrounds CRUD](#section-39-campgrounds-crud)
+  - [System Information](#system-information)
+  - [Requirements](#requirements)
 - [Section 41: Adding Basic Styles](#section-41-adding-basic-styles)
 - [Section 43: Errors & Validating Data](#section-43-errors--validating-data)
 - [Section 46: Adding the Reviews Model](#section-46-adding-the-reviews-model)
@@ -22,7 +24,35 @@ While other sections pushed to GitHub take a more Gist approach for academic pur
 - [Section 59: Deploying](#section-59-deploying)
 
 ## Section 39: Campgrounds CRUD
+This section performs the initial setup of the YelpCamp app. This includes 
+- Setting up a new npm package
+- Requiring initial packages
+- Establishing the Express server connection
+- Establishing the MongoDB connection
+- Setting up ejs
+- Seeding the database
+- Creating basic CRUD functionality
+  - GET all campgrounds, index route `/campgrounds`
+  - GET a campground, show route `/campgrounds/:id`
+  - GET a form for a new campground, new route `campgrounds/new`
+    - POST a new campground and redirect back to index `/campgrounds`
+      - Use middleware to read `urlencoded` data
+  - GET an edit form for a campground, edit route `campgrounds/:id/edit`
+    - PUT edited campground data and redirect back to campground `/campgrounds/:id`
+      - Require `method-override` to use other methods than GET and POST in HTML forms
+  - DELETE a campground from show page, delete route `campgrounds/:id/delete` and redirect back to `/campgrounds`.
 
+### System Information
+This application was setup on macOS 10.13.6 High Sierra.
+
+Note that in order to run this application on High Sierra, Node v16.20.2 and MongoDB 4.4.25 are required. 
+
+### Requirements
+- ejs ^3.1.9
+- express ^4.18.2
+- mongoose ^7.6.2 
+- node 16.20.2
+- npm 8.19.4
 
 ## Section 41: Adding Basic Styles
 
