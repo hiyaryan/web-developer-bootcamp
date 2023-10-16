@@ -10,6 +10,7 @@ While other sections pushed to GitHub take a more Gist approach for academic pur
   - [System Information](#system-information)
   - [Requirements](#requirements)
 - [Section 41: Adding Basic Styles](#section-41-adding-basic-styles)
+  - [Packages](#packages)
 - [Section 43: Errors & Validating Data](#section-43-errors--validating-data)
 - [Section 46: Adding the Reviews Model](#section-46-adding-the-reviews-model)
 - [Section 49: Restructuring & Flash](#section-49-restructuring--flash)
@@ -55,7 +56,35 @@ Note that in order to run this application on High Sierra, Node v16.20.2 and Mon
 - npm 8.19.4
 
 ## Section 41: Adding Basic Styles
+This section adds basic styles to the YelpCamp app. This includes
+- Requiring `ejs-mate` to extend `ejs` functionality
+  - Registering the `ejs` callback function for the Express `app.engine` to `ejs-mate`
+  - Creating a layouts folder in the views directory with a `boilerplate.ejs` file
+  - Updating all `.ejs` files in the views directory to use the boilerplate code in `boilerplate.ejs`
+- Quick starting [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/#js-components) in `boilerplate.ejs` with CDN links and JS [Popper](https://popper.js.org/) scripts
+  - Wrapping the body in a `<main>` container
+    - Adding margin to the main container `mt-5` 
+- Adding a simple [navbar](https://getbootstrap.com/docs/5.3/components/navbar/#nav) to `boilerplate.ejs`
+  - Changing the color to `navbar-dark` and background to `bg-dark`
+  - Making the navbar sticky
+  - Updating the navbar items to Home, Campgrounds, New Campground
+- Making a partials folder in the views directory to hold reusable components
+  - Creating a `navbar.ejs` partial
+  - Creating a `footer.ejs` partial
+- Adding flex to the body of `boilerplate.ejs` with `d-flex` and `flex-column`
+  - Adjusting the viewport height with `vh-100`
+  - Moving the footer to the bottom with `mt-auto`
+- Adding images from Unsplash [In the woods](https://unsplash.com/collections/483251/in-the-woods) collection
+  - Updating model to include `image`
+- Reseeding campgrounds database to include `image` url, `description` of lorem text, and `price` of a random amount between $10 and $30
+- Updating `show` page to include `image`
+- Refactoring the `index` page to show a list of [bootstrap cards](https://getbootstrap.com/docs/5.3/components/card/#example)
+- Styling the `new` page with bootstrap styles and adding ability to add image url add price, and add description.
+- Styling the `edit` page with bootstrap styles and adding ability to edit image url, edit price, and edit description.
+- Styling the `show` page and adding the image, description, price and updating the footer to display recently added, "2 days ago", text.
 
+### Packages
+- [EJS Mate](https://www.npmjs.com/package/ejs-mate) - Express 4.x `layout`, `partial` and `block` template functions for the EJS template engine.
 
 ## Section 43: Errors & Validating Data
 
