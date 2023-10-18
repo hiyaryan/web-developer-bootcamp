@@ -12,6 +12,7 @@ While other sections pushed to GitHub take a more Gist approach for academic pur
 - [Section 41: Adding Basic Styles](#section-41-adding-basic-styles)
   - [Packages](#packages)
 - [Section 43: Errors & Validating Data](#section-43-errors--validating-data)
+  - [Packages](#packages-1)
 - [Section 46: Adding the Reviews Model](#section-46-adding-the-reviews-model)
 - [Section 49: Restructuring & Flash](#section-49-restructuring--flash)
 - [Section 51: Adding in Authentication](#section-51-adding-in-authentication)
@@ -54,6 +55,8 @@ Note that in order to run this application on High Sierra, Node v16.20.2 and Mon
 - mongoose ^7.6.2 
 - node 16.20.2
 - npm 8.19.4
+- ejs-mate ^4.0.0
+- joi ^17.11.0
 
 ## Section 41: Adding Basic Styles
 This section adds basic styles to the YelpCamp app. This includes
@@ -87,7 +90,29 @@ This section adds basic styles to the YelpCamp app. This includes
 - [EJS Mate](https://www.npmjs.com/package/ejs-mate) - Express 4.x `layout`, `partial` and `block` template functions for the EJS template engine.
 
 ## Section 43: Errors & Validating Data
+This adds error handling and data validation. This includes,
+- Inserting [bootstrap validation](https://getbootstrap.com/docs/5.3/forms/validation/) for client side error handling
+  - Adding `novalidate` to forms and `required` input of `new.ejs` and `edit.ejs`
+  - Adding validation feedback text with `invalid-feedback` and `valid-feedback` classes
+  - Adding script for bootstrap validation to `boilerplate.js` accessible via `validated-form` class added to `new.ejs` and `edit.ejs`
+- Adding a generic error handler to the bottom of `app.js`
+  - Setting a generic `500` status code destructured from `err` and `"Something went wrong message"` if no message is sent from other middleware handlers
+- Creating a utils directory for utility functions and classes
+  - Creating a generic `ExpressError` class in utils that can be created when an error is caught
+  - Creating a `catchAsync` function in utils that can be used to generalize the actions taken when an error is caught
+- Adding a catch-all path for all undefined routes with `404` status code and message `"Page not found"`
+- Adding server side error handling
+  - Handling invalid form submissions via Postman/Hopscotch or cURL commands with JOI error messages and `400` status code
+  - Creating a `schemas.js` file to export schemas
+  - Handling data validation with JOI
+    - Creating a JOI `campgroundSchema` to validate data before the data is modeled through the Mongoose `campgroundSchema` in `schemas.js`
+    - Requiring `schema.js` in `app.js` and destructuring from it `campgroundSchema`
+    - Creating a callback function `validateCampground` that validates data using the JOI `campgroundSchema`, throwing an error if invalid, or calling next otherwise
+    - Passing `validateCampground` to `app.post` and `app.put` methods as middleware
+- Creating an production `error.ejs` view page to respond with when an error is caught showing the error message, stack trace, and status code.
 
+### Packages
+- [JOI](https://www.npmjs.com/package/joi) - [`joi`](https://joi.dev/api/?v=17.9.1) lets you describe your data using a simple, intuitive, and readable language.
 
 ## Section 46: Adding the Reviews Model
 
