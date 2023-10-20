@@ -90,7 +90,7 @@ This section adds basic styles to the YelpCamp app. This includes
 - [EJS Mate](https://www.npmjs.com/package/ejs-mate) - Express 4.x `layout`, `partial` and `block` template functions for the EJS template engine.
 
 ## Section 43: Errors & Validating Data
-This adds error handling and data validation. This includes,
+This section adds error handling and data validation. This includes,
 - Inserting [bootstrap validation](https://getbootstrap.com/docs/5.3/forms/validation/) for client side error handling
   - Adding `novalidate` to forms and `required` input of `new.ejs` and `edit.ejs`
   - Adding validation feedback text with `invalid-feedback` and `valid-feedback` classes
@@ -115,7 +115,36 @@ This adds error handling and data validation. This includes,
 - [JOI](https://www.npmjs.com/package/joi) - [`joi`](https://joi.dev/api/?v=17.9.1) lets you describe your data using a simple, intuitive, and readable language.
 
 ## Section 46: Adding the Reviews Model
-
+This section adds a new feature to add reviews to a campground. This includes,
+- Defining the reviews model
+  - Composing the reviews of a `body` and `rating`
+  - Adding a reference to the reviews using the `ObjectId` on the campground schema 
+- Adding a form to leave reviews
+  - Updating the campground show page with a form to submit a review and rating to a reviews object
+    - Adding a `range` input from 1 to 5 for a rating
+    - Adding a `textfield` input for a review body
+- Creating reviews
+  - Submitting the reviews form to `/campground/<%= campground._id %>/reviews`
+  - Adding a new reviews route to create a new review on a specific campground in the database
+- Validating reviews
+  - Adding client-side validation to the campground show page using bootstrap
+  - Adding server-side validation using JOI
+- Displaying reviews
+  - Retrieving reviews for a campground using the `populate("reviews")` method along `/campground/:id`
+  - Displaying the reviews on the campground show page
+- Adding styles to the reviews
+  - Placing each review in a bootstrap card to more easily distinguish between reviews
+  - Removing the `offset-3` from the campground card
+  - Evenly distributing space with `col-6` to both the campground and reviews cards so that they can be viewed side-by-side
+- Deleting reviews
+  - Adding a new delete route for a single review on a specific campground at `/campgrounds/:campgroundId/reviews/:reviewId`
+  - Adding a delete `button` to each review card on the campground show age directed to the delete route
+  - Removing the review using the Mongo [`$pull`](https://www.mongodb.com/docs/manual/reference/operator/update/pull/) operator
+  - Redirecting to the campground show page
+- Adding campground delete middleware to the `CampgroundSchema`
+  - Deleting all reviews associated with a campground when the campground is deleted
+    - Using the [`findOneAndDelete`](https://mongoosejs.com/docs/api/query.html#Query.prototype.findOneAndDelete()) middleware triggered when [`findByIdAndDelete`](https://mongoosejs.com/docs/api/model.html#Model.findByIdAndDelete()) is called
+    - Querying all reviews by `_id` `$in` the deleted campground to remove using `deleteMany`.
 
 ## Section 49: Restructuring & Flash
 
