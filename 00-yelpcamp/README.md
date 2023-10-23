@@ -15,6 +15,7 @@ While other sections pushed to GitHub take a more Gist approach for academic pur
   - [Packages](#packages-1)
 - [Section 46: Adding the Reviews Model](#section-46-adding-the-reviews-model)
 - [Section 49: Restructuring & Flash](#section-49-restructuring--flash)
+  - [Packages](#packages-2)
 - [Section 51: Adding in Authentication](#section-51-adding-in-authentication)
 - [Section 52: Basic Authorization](#section-52-basic-authorization)
 - [Section 53: Controllers & Star Ratings](#section-53-controllers--star-ratings)
@@ -26,7 +27,7 @@ While other sections pushed to GitHub take a more Gist approach for academic pur
 - [Section 59: Deploying](#section-59-deploying)
 
 ## Section 39: Campgrounds CRUD
-This section performs the initial setup of the YelpCamp app. This includes 
+This section performs the initial setup of the YelpCamp app. This includes,
 - Setting up a new npm package
 - Requiring initial packages
 - Establishing the Express server connection
@@ -55,11 +56,14 @@ Note that in order to run this application on High Sierra, Node v16.20.2 and Mon
 - mongoose ^7.6.2 
 - node 16.20.2
 - npm 8.19.4
+- method-override ^3.0.0
 - ejs-mate ^4.0.0
 - joi ^17.11.0
+- express-session ^1.17.3
+- connect-flash ^0.1.1
 
 ## Section 41: Adding Basic Styles
-This section adds basic styles to the YelpCamp app. This includes
+This section adds basic styles to the YelpCamp app. This includes,
 - Requiring `ejs-mate` to extend `ejs` functionality
   - Registering the `ejs` callback function for the Express `app.engine` to `ejs-mate`
   - Creating a layouts folder in the views directory with a `boilerplate.ejs` file
@@ -147,7 +151,34 @@ This section adds a new feature to add reviews to a campground. This includes,
     - Querying all reviews by `_id` `$in` the deleted campground to remove using `deleteMany`.
 
 ## Section 49: Restructuring & Flash
-
+This section adds some restructuring to the project and incorporates flash. This includes,
+- Restructuring the routes from `app.js` into their own files in a `routes` directory
+  - Breaking out the `/campgrounds` routes and moving its corresponding validation middleware, `validateCampgrounds`, into a `campgrounds.js` file
+  - Breaking out the `/reviews` routes and moving its corresponding validation middleware, `validateReviews`, into a `reviews.js` file
+  - Using `"/campgrounds"` and `"/campgrounds/:id/reviews"` in `app.js` as middleware to the routing resources broken out
+  - Resolving new breaking out errors
+    - Ensuring redirects include the root `/campgrounds` in its url
+    - Ensuring path params from `app.js` middleware are sent to the routers with the option `{ mergeParams: true }` passed to the Express Router on import
+- Serving static assets
+  - Adding a public directory to the project for images, custom style sheets, and JavaScript scripts to respond with
+    - Moving the form validation script from `boilerplate.ejs` into its own file, `validateForm.js`, in public to be served on every view
+  - Telling Express to use the public directory to serve static assets 
+- Configuring session
+  - Requiring `express-session` in `app.js`
+  - Using `session` with `secret`, `resave`, `saveUninitialized`, and `cookie` `expires`, `maxAge`, and `httpOnly` configurations
+- Setting up Flash
+  - Requiring `connect-flash` in `app.js`
+  - Storing `success` and `error` properties in the flash
+  - Creating a `flash.ejs` partial
+- Adding a flash success alert to `flash.ejs`
+  - Inserting a [dismissible](https://getbootstrap.com/docs/5.2/components/alerts/#dismissing) bootstrap success alert 
+  - Storing flash success message for successful POST, PUT, and DELETE requests on campground and review routes
+- Adding a flash error alert to `flash.ejs`
+  - Inserting a [dismissible](https://getbootstrap.com/docs/5.2/components/alerts/#dismissing) bootstrap danger alert 
+  - Storing flash error message for errors on show one and edit GET routes requesting a specific campground that does not exist
+### Packages
+- [Express Session](https://www.npmjs.com/package/express-session) - [`express-session`](https://expressjs.com/en/resources/middleware/session.html) creates a session middleware.
+- [Flash](https://github.com/jaredhanson/connect-flash#readme) - [`connect-flash`](https://www.npmjs.com/package/connect-flash?activeTab=readme) - writes messages to the flash which are cleared after being displayed to the user.
 
 ## Section 51: Adding in Authentication
 
