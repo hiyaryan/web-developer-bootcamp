@@ -264,7 +264,27 @@ This section adds basic authorization. This includes,
 - Refactoring all middleware from `campgrounds.js` and `reviews.js` in routes to `middleware.js` in root directory.
 
 ## Section 53: Controllers & Star Ratings
-
+This section performs some route refactoring and adding a new review system. This includes,
+- Refactoring `campgrounds.js` CRUD methods into a campgrounds controller
+  - Making a new controllers directory
+  - Making a `campgrounds.js` file in controllers
+  - Moving the bodies of all CRUD methods in `campgrounds.js` from routes to `campgrounds.js` in controllers
+- Refactoring `reviews.js` CRUD methods into a campgrounds controller
+  - Making a `reviews.js` file in controllers
+  - Moving the bodies of all CRUD methods in `reviews.js` from routes to `reviews.js` in controllers
+- Refactoring `users.js` CRUD methods into a campgrounds controller
+  - Making a `users.js` file in controllers
+  - Moving the bodies of all CRUD methods in `users.js` from routes to `users.js` in controllers
+- Restructuring routes to chain routes (see [`router.route(path)`](https://expressjs.com/en/4x/api.html#router.route)) with different verbs that are along the same path
+  - Grouping routes in `campground.js` 
+  - Grouping routes in `users.js` 
+- Adding a star review system using [starbility](https://github.com/LunarLogic/starability)
+  - Updating the reviews section header
+  - Adding a `stars.css` sheet to sheets in the public directory
+  - Importing `stars.css` into campgrounds `show.ejs`
+  - Updating campgrounds `show.ejs` to display the total number of stars for the rating
+  - Moving username as the review card subtitle to the card title
+  - Updating the rating mechanism from a slider to clicking on the total number of stars.
 
 ## Section 54: Image Upload
 
