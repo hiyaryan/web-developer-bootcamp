@@ -239,7 +239,29 @@ This section adds authentication. This includes,
 - Passport local Mongoose - [`passport-Local-mongoose`](https://www.npmjs.com/package/passport-local-mongoose) is a [Mongoose plugin](https://mongoosejs.com/docs/plugins.html) that simplifies building username and password login with [Passport](http://passportjs.org/).
 
 ## Section 52: Basic Authorization
-
+This section adds basic authorization. This includes,
+- Adding an author to a campground
+  - Adding a new `author` field to the campground schema and updating the `index.js` file in the seeds directory
+    - Connecting the campground schema to the `User` database
+  - Reseeding the campground database with campgrounds including an author
+  - Populating a campground from the show campground route with the author
+  - Adding a `Submitted by` section to the show `card` of a campground
+  - Updating the POST route for a new campground to include the author making the request from `req.author._id`
+- Showing and hiding Edit and Delete buttons on the campground card based on the current user
+  - Adding conditional to campgrounds show page to see Edit and Delete buttons on the campground
+    - Requiring a user to be signed in (user is not undefined) and the user is the author 
+- Updating the server-side campgrounds POST, PUT, and DELETE routes and their associated GET routes for their forms to prevent unauthorized users from using postman or cURL commands to perform the actions
+  - Creating middleware `isAuthorized` to check that a user can POST, PUT, or DELETE a campground along `/campgrounds` routes if they are the author
+- Adding more reviews authorization
+  - Updating the server-side reviews POST, and DELETE routes to prevent unauthorized users from using postman or cURL commands to perform the actions
+    - Adding an `author` field to the reviews schema
+    - Setting the `author` on a POST request for a new review
+    - Creating middleware `isReviewAuthor` to authorize a user deleting a review if they are the review author
+  - Updating the review card
+    - Adding the review author name to the card as a subtitle
+    - Hiding Delete button on campgrounds show view based on the current user
+      - Adding logic to render the Delete button if the current user logged in is the review author
+- Refactoring all middleware from `campgrounds.js` and `reviews.js` in routes to `middleware.js` in root directory.
 
 ## Section 53: Controllers & Star Ratings
 
