@@ -17,6 +17,7 @@ While other sections pushed to GitHub take a more Gist approach for academic pur
 - [Section 49: Restructuring & Flash](#section-49-restructuring--flash)
   - [Packages](#packages-2)
 - [Section 51: Adding in Authentication](#section-51-adding-in-authentication)
+  - [Packages](#packages-3)
 - [Section 52: Basic Authorization](#section-52-basic-authorization)
 - [Section 53: Controllers & Star Ratings](#section-53-controllers--star-ratings)
 - [Section 54: Image Upload](#section-54-image-upload)
@@ -61,6 +62,9 @@ Note that in order to run this application on High Sierra, Node v16.20.2 and Mon
 - joi ^17.11.0
 - express-session ^1.17.3
 - connect-flash ^0.1.1
+- passport ^0.6.0
+- passport-local ^1.0.0
+- passport-local-mongoose ^8.0.0
 
 ## Section 41: Adding Basic Styles
 This section adds basic styles to the YelpCamp app. This includes,
@@ -181,7 +185,58 @@ This section adds some restructuring to the project and incorporates flash. This
 - [Flash](https://github.com/jaredhanson/connect-flash#readme) - [`connect-flash`](https://www.npmjs.com/package/connect-flash?activeTab=readme) - writes messages to the flash which are cleared after being displayed to the user.
 
 ## Section 51: Adding in Authentication
-
+This section adds authentication. This includes,
+- Installing `passport`, `passport-local`, and `passport-local-mongoose`
+- Creating a user model exported from model/user.js
+  - Requiring `passport-local-mongoose`
+  - Adding a required and unique email field
+  - Setting `passportLocalMongoose` plugin on the `userSchema`
+- Configuring passport
+  - Requiring `passport`, `passport-local`, and `user.js` from models in `app.js`
+  - Initializing `passport`
+  - Executing `session` on `passport`
+  - Passing `passport-local` to `passport` as the `LocalStrategy`
+    - Authenticating `User` and passing it to the `LocalStrategy`
+  - Register serialize and deserialize passport functions with the plugin functions added to `User` from `passport-local-mongoose` adding cookies to the session 
+- Creating a view user `register.ejs` form
+  - Adding required `username`, `email`, and `password` fields 
+  - Creating a `users.js` router to the views in users
+    - Adding a GET route to the register form
+  - Requiring routes to users in `app.js`
+    - Setting user router the root url `/`
+- Adding register route logic to `users.js` in routes
+  - Setting up the POST route that accepts a `username`, `email`, and `password`
+    - Creating a new user
+    - Registering the new user with the password to hash
+    - Returning a `success` flash and redirect to `/campgrounds` or error message with a redirect to `/register`.
+- Adding login route logic to `users.js` in routes
+  - Requiring `passport`
+  - Creating a login form in a new `login.ejs` view with `username` and `password` fields
+  - Creating a GET route to the login view
+  - Creating a POST route to `/login` using `passport` middleware to authenticate login
+    - Flashes an error message if username or password are invalid
+    - Otherwise redirects to `/campgrounds`
+- Checking that a user `isLoggedIn` using middleware
+  - Creating a `middleware.js` file in the route directory with the `isLoggedIn` callback middleware
+  - Requiring `isLoggedIn` in `campground.js` and `reviews.js` routes
+  - Passing `isLoggedIn` to all creation, updating, and deletion routes along `/campgrounds` and `/reviews` including the retrieval of their associated forms
+- Adding logout route logic to `users.js` in routes
+  - Calling [`logout()`](https://www.passportjs.org/concepts/authentication/logout/) on `req` (added to `req` by `passport`) and passing it a callback to either return an error to the `next` middleware or flash success and redirect to `/campgrounds`
+  - Adding `Login`, `Register`, and `Logout` `nav-links` to the navbar
+- Adding a `user` helper to `res.locals`
+  - Updating the navbar such that if a user is not `undefined` the `Logout` link is displayed, otherwise the `Login` and `Register` links are displayed
+- Updating register route so that when a user registers they are logged in
+  - Using [`req.login`](https://www.passportjs.org/concepts/authentication/login/) (added to `req` by `passport`) in the `/register` route and passing it a callback to either return an error or create a session login, flash success, and redirect to `/campgrounds`
+- Adding `returnTo` behavior to redirect a user to the page they were viewing before logging in
+  - Adding a new `storeReturnTo` middleware in `middleware.js` to pass to users `/login` before `password.authenticate` deletes the session cookie `req.session.originalUrl`
+  - Saving `req.session.originalUrl` to a new `res.locals.returnTo` cookie
+  - Redirecting on users `/login` endpoint to url in `returnTo` or `/campgrounds` if `returnTo` is undefined
+  - Deleting `res.locals.returnTo` to clear session space
+ 
+### Packages
+- [Passport](https://www.passportjs.org/) - [`passport`](https://www.npmjs.com/package/passport) is [Express](http://expressjs.com/)-compatible authentication middleware for [Node.js](http://nodejs.org/). 
+- [Passport local](https://www.passportjs.org/packages/passport-local/) - [`passport-local`](https://www.npmjs.com/package/passport-local) is a [Passport](http://passportjs.org/) strategy for authenticating with a username and password.
+- Passport local Mongoose - [`passport-Local-mongoose`](https://www.npmjs.com/package/passport-local-mongoose) is a [Mongoose plugin](https://mongoosejs.com/docs/plugins.html) that simplifies building username and password login with [Passport](http://passportjs.org/).
 
 ## Section 52: Basic Authorization
 
