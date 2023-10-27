@@ -21,6 +21,7 @@ While other sections pushed to GitHub take a more Gist approach for academic pur
 - [Section 52: Basic Authorization](#section-52-basic-authorization)
 - [Section 53: Controllers & Star Ratings](#section-53-controllers--star-ratings)
 - [Section 54: Image Upload](#section-54-image-upload)
+  - [Packages](#packages-4)
 - [Section 55: Adding Maps](#section-55-adding-maps)
 - [Section 56: Cluster Map](#section-56-cluster-map)
 - [Section 57: Styles Clean Up](#section-57-styles-clean-up)
@@ -65,6 +66,10 @@ Note that in order to run this application on High Sierra, Node v16.20.2 and Mon
 - passport ^0.6.0
 - passport-local ^1.0.0
 - passport-local-mongoose ^8.0.0
+- multer ^1.4.5-lts.1
+- dotenv ^16.3.1
+- cloudinary ^1.41.0
+- multer-storage-cloudinary ^4.0.0
 
 ## Section 41: Adding Basic Styles
 This section adds basic styles to the YelpCamp app. This includes,
@@ -287,7 +292,65 @@ This section performs some route refactoring and adding a new review system. Thi
   - Updating the rating mechanism from a slider to clicking on the total number of stars.
 
 ## Section 54: Image Upload
+This section adds the ability to upload images. This includes,
+- Setting up [Cloudinary](https://cloudinary.com/) free tier to store photos
+  - Storing urls to photos in Cloudinary in MongoDB making them directly accessible using `<img>` tags in the views
+- Updating `enctype` of new campground view to `multipart/form-data`
+  - Replacing image url `text` input to `file` input
+  - Using [Multer](https://github.com/expressjs/multer#readme) to parse `multipart/form-data`
+    - Installing `multer`
+    - Requiring multer in `campgrounds.js` route
+- Setting up environment variables with `dotenv`
+  - Storing Cloudinary name, key, and secret in `.env` file in the root directory of the project
+  - Storing environment variables in `process.env` only if the `NODE_ENV` is in development (not production)
+- Uploading to Cloudinary
+  - Creating a cloudinary directory in the root directory of the project
+    - Creating an `index.js` and requiring `cloudinary` and `multer-storage-cloudinary`
+    - Setting the cloudinary config with the values in `.env` to associate the app with your Cloudinary account
+    - Configuring CloudinaryStorage with the cloudinary config, which `folder` to store the images in, and the `allowed_formats` of the images
+    - Exporting cloudinary and storage 
+    - Requiring storage in routes where image uploads occur
+      - Passing `upload` multer function as middleware to campground index POST endpoint
+-  Storing uploaded image links in Mongo
+   -  Setting the campground image field on new campground creation to the image url and filename pulled from Cloudinary
+   -  Updating the campground schema `image` field to `images` with two subfields, `url` and `filename`
+      -  Removing JOI image validation
+   - Displaying all images on a campground show page and only the first image on the campgrounds index page
+- Displaying images in a carousel
+  - Adding aa basic bootstrap [carousel](https://getbootstrap.com/docs/5.3/components/carousel/#basic-examples) to campground show page
+  - Setting the first image with `active` class and all others with `""`
+  - Showing next and previous buttons only if there are more than one images
+- Updating database seeds
+  - Updating `image` field to `images`, an array of images
+  - Adding two image urls with their associated filenames
+  - Reseeding the database
+- Adding upload to edit page
+  - Updating campground edit controller to spread new images onto existing campground images before saving to database
+  - Adding upload middleware to PUT method along the campgrounds `/:id` route
+  - Updating the edit campground form to accept `multipart/form-data` 
+    - Updating `input` type to `file` allowing `multiple`
+- Customizing file `input`
+  - Replacing file input with bootstrap's [file input](https://getbootstrap.com/docs/5.3/forms/form-control/#file-input)
+- Deleting images
+  - Updating edit campground form to delete images
+    - Adding `img-thumbnail`s for each image in the campground selectable by checkbox
+      - Setting each selected checkbox with a value `img.filename` to a `deleteImages` array passed to the `req.body`
+    - Making a query to campground database to pull all images in `deleteImages` from `req.body`
+  - Deleting images on the backend
+  - Requiring `cloudinary` in campgrounds controller
+  - Calling `destroy` on `cloudinary.uploader` for each image in `deleteImages`
+- Adding a thumbnail virtual property
+  - Using cloudinary url [image transformations](https://cloudinary.com/documentation/image_transformations) to reduce the image to an appropriate thumbnail size of 200px
+  - Updating the campground mongoose schema
+    - Creating an ImageSchema with a virtual that creates a thumbnail field with the value of an image's transformed cloudinary url 
+    - Nesting ImageSchema in the CampgroundSchema images field
+    - Updating the campground edit form to use the new `img.thumbnail` field.
 
+### Packages
+- [Multer](https://github.com/expressjs/multer#readme) - [`multer`](https://www.npmjs.com/package/multer) is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files.
+- [Dotenv](https://github.com/motdotla/dotenv#readme) - [`dotenv`](https://www.npmjs.com/package/dotenv) is a zero-dependency module that loads environment variables from a `.env` file into [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env).
+- [Cloudinary](https://cloudinary.com/documentation/node_integration) - [`cloudinary`](https://www.npmjs.com/package/cloudinary) allows you to quickly and easily integrate your application with Cloudinary.
+- [Multer Storage Cloudinary](https://github.com/affanshahid/multer-storage-cloudinary) - [`multer-storage-cloudinary`](https://www.npmjs.com/package/multer-storage-cloudinary) is a multer storage engine for Cloudinary.
 
 ## Section 55: Adding Maps
 
