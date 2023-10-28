@@ -23,6 +23,7 @@ While other sections pushed to GitHub take a more Gist approach for academic pur
 - [Section 54: Image Upload](#section-54-image-upload)
   - [Packages](#packages-4)
 - [Section 55: Adding Maps](#section-55-adding-maps)
+  - [Packages](#packages-5)
 - [Section 56: Cluster Map](#section-56-cluster-map)
 - [Section 57: Styles Clean Up](#section-57-styles-clean-up)
 - [Section 58: Common Security Issues](#section-58-common-security-issues)
@@ -70,6 +71,7 @@ Note that in order to run this application on High Sierra, Node v16.20.2 and Mon
 - dotenv ^16.3.1
 - cloudinary ^1.41.0
 - multer-storage-cloudinary ^4.0.0
+- @mapbox/mapbox-sdk ^0.15.3
 
 ## Section 41: Adding Basic Styles
 This section adds basic styles to the YelpCamp app. This includes,
@@ -353,7 +355,34 @@ This section adds the ability to upload images. This includes,
 - [Multer Storage Cloudinary](https://github.com/affanshahid/multer-storage-cloudinary) - [`multer-storage-cloudinary`](https://www.npmjs.com/package/multer-storage-cloudinary) is a multer storage engine for Cloudinary.
 
 ## Section 55: Adding Maps
+This section adds the ability to display a campground on a map. This includes,
+- Registering for Mapbox
+  - Adding `MAPBOX_TOKEN` to env
+- Geocoding the campground location
+  - Using [forwardGeocode](https://github.com/mapbox/mapbox-sdk-js/blob/main/docs/services.md#forwardgeocode) to search for the latitude and longitude for a campground location 
+  - Retrieving latitude and longitude from the returned object from forwardGeocode `body.features[0].geometry.coordinates`
+- Working with [GeoJSON](https://geojson.org/)
+  - Updating campground schema with GeoJSON following Mongoose [Point Schema](https://mongoosejs.com/docs/geojson.html)
+  - Adding GeoJSON to `campground.geometry` in the campground controller to create a new campground with geo data
+- Displaying a Map
+  - Adding CDN links to mapbox stylesheets and scripts to `boilerplate` view
+  - Adding map `div` to show page above the carousel
+  - Retrieving the mapToken from `.env` in the campground show page
+  - Creating a new `showPageMap.js` public script to create a new Map from `mapboxgl` with the `mapToken` 
+- Centering the Map on a Campground
+  - Passing the campground `coordinates` to `showPageMap.ejs` from the campground show page 
+  - Updating public `showPageMap.ejs` mapboxgl Map's center field with coordinates from the campground
+  - Adding a mapboxgl Marker on the Map at the campground coordinates
+- Fixing seeds
+  - Adding geometry to seeds with default coordinates `[-113.1331, 47.0202]`
+  - Reseeding database
+- Customizing Map Popup
+  - Adding a clickable [popup](https://docs.mapbox.com/mapbox-gl-js/api/markers/#marker#setpopup) to the map
+  - Passing the campground `title` and `location` to `showPageMap.ejs` from the campground show page to display on the popup
+  - Updating the map style to `light-v10`.
 
+### Packages
+- [Mapbox SDK](https://github.com/mapbox/mapbox-sdk-js#readme) - [`@mapbox/mapbox-sdk`](https://www.npmjs.com/package/@mapbox/mapbox-sdk) is a JS SDK for working with [Mapbox APIs](https://docs.mapbox.com/api/).
 
 ## Section 56: Cluster Map
 

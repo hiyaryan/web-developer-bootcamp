@@ -49,6 +49,7 @@
         </div>
     </div>
     <div class="col-6">
+        <div class="mb-3" id="map" style="width: 400px; height: 300px;"></div>
         <% if (user) { %>
         <h2>Rate <%= campground.title %></h2>
         <form class="mb-3 validated-form" action="/campgrounds/<%= campground._id %>/reviews" method="POST" novalidate>
@@ -100,3 +101,11 @@
         <% } %>
     </div>
 </div>
+
+<script>
+    const mapToken = "<%- process.env.MAPBOX_TOKEN %>";
+    const coordinates = "<%- JSON.stringify(campground.geometry.coordinates) %>";
+    const title = "<%- campground.title %>";
+    const campgroundLocation = "<%- campground.location %>";
+</script>
+<script src="/scripts/showPageMap.js"></script>
