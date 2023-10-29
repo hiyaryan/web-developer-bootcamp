@@ -385,7 +385,31 @@ This section adds the ability to display a campground on a map. This includes,
 - [Mapbox SDK](https://github.com/mapbox/mapbox-sdk-js#readme) - [`@mapbox/mapbox-sdk`](https://www.npmjs.com/package/@mapbox/mapbox-sdk) is a JS SDK for working with [Mapbox APIs](https://docs.mapbox.com/api/).
 
 ## Section 56: Cluster Map
-
+This section adds the ability to search for a campground using a cluster map. This involves,
+- Adding an earthquake [cluster map](https://docs.mapbox.com/mapbox-gl-js/example/cluster/)
+  - Adding a map `div` to the top of the campground index page
+  - Adding a new public `clusterMap.js` script taken from the mapbox earthquake cluster map example
+  - Setting the `MAPBOX_TOKEN` from `.env` to be used in `clusterMap.js`
+- Reseeding the database
+  - Updating coordinates with longitude and latitude provided in the cities dataset
+- Updating the earthquake cluster map to display campgrounds
+  - Adding `clusterMap.js` as a script to campgrounds index page
+  - Setting a new campgrounds object to `{features: campgrounds}` to pass to `clusterMaps.js`
+  - Updating all sources in `clusterMap.js` from `earthquakes` to `campgrounds`
+  - Updating the data in `addSource` to `campground`
+- Changing cluster styles
+  - Changing the color and size for points on the map where there are more campgrounds
+    - Higher density points are larger and darker
+    - Lower density points are smaller and lighter
+  - Updating map style to `light-v10`
+- Adding custom popups
+  - Adding a virtual to the campground schema to construct `properties.popupMarkup` html
+    - Creating an anchor tag to the campground show page and paragraph with a partial description of 30 characters
+  - Setting options for the campground schema to allow virtual fields to be displayed on the client side
+  - Removing earthquake information regarding tsunamis from `clusterMap.js`
+  - Setting a new `popupMarkup` in `map.on` to the `popupMarkup` from the CampgroundSchema virtual
+    - Retrieving `popupMarkup` from GeoJSON `e.features[0].properties`
+    - Tagging onto `mapboxgl.Popup` `setHTML` method with `popupMarkup` as its argument.
 
 ## Section 57: Styles Clean Up
 
