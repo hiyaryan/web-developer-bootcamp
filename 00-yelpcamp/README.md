@@ -27,6 +27,7 @@ While other sections pushed to GitHub take a more Gist approach for academic pur
 - [Section 56: Cluster Map](#section-56-cluster-map)
 - [Section 57: Styles Clean Up](#section-57-styles-clean-up)
 - [Section 58: Common Security Issues](#section-58-common-security-issues)
+  - [Packages](#packages-6)
 - [Section 59: Deploying](#section-59-deploying)
 
 ## Section 39: Campgrounds CRUD
@@ -72,6 +73,9 @@ Note that in order to run this application on High Sierra, Node v16.20.2 and Mon
 - cloudinary ^1.41.0
 - multer-storage-cloudinary ^4.0.0
 - @mapbox/mapbox-sdk ^0.15.3
+- express-mongo-sanitize ^2.2.0
+- sanitize-html ^2.11.0
+- helmet: ^7.0.0
 
 ## Section 41: Adding Basic Styles
 This section adds basic styles to the YelpCamp app. This includes,
@@ -418,10 +422,25 @@ This section adds more styles. This includes,
 - Styling the register form
 - Spacing campgrounds
 - Removing inline map styles
-- Adding map [controls](https://docs.mapbox.com/mapbox-gl-js/example/navigation/)
+- Adding map [controls](https://docs.mapbox.com/mapbox-gl-js/example/navigation/).
 
 ## Section 58: Common Security Issues
+This section addresses common security issues. This includes,
+- Dealing with potential Mongo injections
+  - Sanitizing user supplied data using `express-mongo-sanitize`
+- Sanitizing HTML to prevent a common XSS attack
+  - Adding an extension to `joi`, `sanitize-html`, to add client-side validation to ensure no HTML can be submitted in any of the form input fields
+- Giving a name to sessionConfig to prevent scripts from searching for common session names such as `connect.sid`
+- Preventing users from seeing the stack trace when an error is caught if in `production` mode
+- Using Helmet to secure the app by setting HTTP response headers
+  - Configuring the app with a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) to specify a list of acceptable [sources](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/Sources#relevant_directives) to retrieve scripts, images, etc.
+  - Adding `crossorigin="anonymous"` to all places on the app that include resources from external origins
+  - Preventing insecure requests from upgrading to `https` by passing `upgradeInsecureRequests: null` to `helmet.contentSecurityPolicy` while app is in development over `http`.
 
+### Packages
+- [Express Mongoose Sanitize](https://github.com/fiznool/express-mongo-sanitize#readme) - [`express-mongo-sanitize`](https://www.npmjs.com/package/express-mongo-sanitize) is an Express 4.x middleware which sanitizes user-supplied data to prevent MongoDB Operator Injections.
+- [sanitize-html](https://github.com/apostrophecms/sanitize-html#readme) - [`sanitize-html`](https://www.npmjs.com/package/sanitize-html) provides a simple HTML sanitizer.
+- [Helmet](https://helmetjs.github.io/) - [`helmet`](https://helmetjs.github.io/) helps secure Express apps by setting HTTP response headers.
 
 ## Section 59: Deploying
 
