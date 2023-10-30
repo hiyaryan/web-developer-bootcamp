@@ -29,6 +29,7 @@ While other sections pushed to GitHub take a more Gist approach for academic pur
 - [Section 58: Common Security Issues](#section-58-common-security-issues)
   - [Packages](#packages-6)
 - [Section 59: Deploying](#section-59-deploying)
+  - [Packages](#packages-7)
 
 ## Section 39: Campgrounds CRUD
 This section performs the initial setup of the YelpCamp app. This includes,
@@ -75,7 +76,8 @@ Note that in order to run this application on High Sierra, Node v16.20.2 and Mon
 - @mapbox/mapbox-sdk ^0.15.3
 - express-mongo-sanitize ^2.2.0
 - sanitize-html ^2.11.0
-- helmet: ^7.0.0
+- helmet ^7.0.0
+- connect-mongo ^5.1.0
 
 ## Section 41: Adding Basic Styles
 This section adds basic styles to the YelpCamp app. This includes,
@@ -443,4 +445,26 @@ This section addresses common security issues. This includes,
 - [Helmet](https://helmetjs.github.io/) - [`helmet`](https://helmetjs.github.io/) helps secure Express apps by setting HTTP response headers.
 
 ## Section 59: Deploying
+This section deploys the app. This includes,
+- Setting up [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register) to serve the database
+  - Creating a free account and creating an M0 cluster
+  - Creating the first user
+  - White listing IP address
+  - Connecting to YelpCamp database
+    - Adding db url to `.env` (found on Atlas at Overview > Connect to YelpCamp)
+    - Passing the db url to `mongoose.connect`
+- Using Mongo for the session store
+  - Installing `mongo-connect`
+  - Requiring `mongo-connect` in `app.js`
+  - Adding the `store` option to session with a new `MongoStore` and associated options
+- Hosting the application over the cloud on [Heroku](https://www.heroku.com/)
+  - Creating a Heroku account (no free-tier available)
+  - Installing Heroku CLI
+  - Logging in to Heroku through the CLI with `$ heroku login`
+  - Pushing to Heroku
+    - Creating a new Heroku app through the CLI with `$ heroku create` in the top level of the application
+  - Fixing Heroku errors
+  - Configuring Heroku `.env` variables. 
 
+### Packages
+[connect-mongo](https://github.com/jdesboeufs/connect-mongo#readme) - [`connect-mongo`](https://www.npmjs.com/package/connect-mongo) is a MongoDB session store for [Connect](https://github.com/senchalabs/connect) and [Express](http://expressjs.com/)

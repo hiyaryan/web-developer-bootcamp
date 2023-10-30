@@ -1,4 +1,6 @@
-require("dotenv").config();
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config();
+}
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -10,6 +12,7 @@ const methodOverride = require("method-override");
 
 const session = require("express-session");
 const flash = require("connect-flash");
+const MongoStore = require('connect-mongo');
 
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -25,7 +28,8 @@ const User = require("./models/user");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
 
-mongoose.connect("mongodb://localhost:27017/yelp-camp")
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/yelp-camp";
+mongoose.connect(dbUrl);
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -96,9 +100,17 @@ app.use(
 );
 
 
+const secret = process.env.SECRET || "secret";
 app.use(session({
     name: "session",
-    secret: process.env.SESSION_SECRET,
+    secret,
+    store: MongoStore.create({
+        mongoUrl: dbUrl,
+        secret,
+        touchAfter: 24 * 3600 // time period in seconds
+    }).on("error", function(e) {
+        console.log("connect-mongo SESSION ERROR", e);
+    }),
     resave: false,
     saveUninitialized: true,
     cookie: {
