@@ -412,7 +412,13 @@ This section adds the ability to search for a campground using a cluster map. Th
     - Tagging onto `mapboxgl.Popup` `setHTML` method with `popupMarkup` as its argument.
 
 ## Section 57: Styles Clean Up
-
+This section adds more styles. This includes,
+- Styling the home page
+- Styling the login form
+- Styling the register form
+- Spacing campgrounds
+- Removing inline map styles
+- Adding map [controls](https://docs.mapbox.com/mapbox-gl-js/example/navigation/)
 
 ## Section 58: Common Security Issues
 
