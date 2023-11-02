@@ -1,0 +1,7 @@
+.PropertyList {
+    display: flex;
+}
+
+.PropertyList li {
+    list-style-type: none;
+}
